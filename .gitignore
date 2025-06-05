@@ -1,0 +1,12 @@
+# Ignore volatile files
+*.nvram
+*.vmxf
+*.vmem
+*.log
+*.vmsd
+*.lck
+*.scoreboard
+*.iso
+*.vmdk
+
+vmconfig.conf
