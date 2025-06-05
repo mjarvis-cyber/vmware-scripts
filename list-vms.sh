@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CONFIG_FILE="./vmconfig.conf"
+VMS_OUTPUT_FILE="./vms.csv"
 
 if [[ -f "$CONFIG_FILE" ]]; then
   source "$CONFIG_FILE"
@@ -8,6 +9,8 @@ else
   echo "[!] Missing config file: $CONFIG_FILE"
   exit 1
 fi
+
+echo "Hostname,IP" > $VMS_OUTPUT_FILE
 
 echo "[*] Running VMs with IPs:"
 
@@ -19,6 +22,7 @@ for win_path in "${vm_list[@]}"; do
     vm_name="${vm_file%.vmx}"
     ip=$("$VMRUN" -T ws getGuestIPAddress "$win_path" 2>/dev/null || echo "Unavailable")
     echo "- $vm_name - $ip"
+    echo "$vm_name,$ip" >> $VMS_OUTPUT_FILE
 done
 
 echo ""

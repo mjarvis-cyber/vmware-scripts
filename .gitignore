@@ -10,3 +10,4 @@
 *.vmdk
 
 vmconfig.conf
+vms.csv
