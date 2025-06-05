@@ -121,7 +121,7 @@ users:
     groups: sudo
     sudo: ALL=(ALL) NOPASSWD:ALL
     chpasswd: { expire: False }
-    hashed_passwd: '\$6\$xiFV/vdLomMezlAI\$7sTlj8E6vdXziOI7AGUpiCofGHaf8z/fJDTsHTs2ptdfQCIJW.bHhAoS7Q/bUHeeDij1EVREZ54hbHa/bdiOG.'
+    hashed_passwd: '${HASHED_PASSWORD}'
     lock_passwd: false
     shell: /bin/bash
     ssh_authorized_keys:
@@ -133,11 +133,6 @@ packages:
 
 runcmd:
   - systemctl enable --now open-vm-tools
-  - rm -f /etc/machine-id
-  - rm -f /var/lib/dbus/machine-id
-  - systemd-machine-id-setup
-  - rm -f /var/lib/dhcp/*
-  - systemctl restart systemd-networkd
 
 final_message: "Cloud-init finished at \$epoch seconds"
 EOF
