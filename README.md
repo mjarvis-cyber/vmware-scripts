@@ -8,3 +8,11 @@ This repo provides scripts which can be run from WSL to interact with VMWare Wor
 ## Creating a new VM
 * Run `./create-vm.sh --list-os` to view available operating systems
 * Run `./create-vm.sh --os <desired-os> <my-vm-name>` to create a VM 
+
+## List VMs
+* Run `./list-vms.sh`
+* This will list to the terminal, and create a `./vms.csv` file
+
+## Interacting with VMs
+* Use the helper `./interact.sh <my-vm-name>`
+* Or just ssh like normal `ssh my-user@my-ip`
