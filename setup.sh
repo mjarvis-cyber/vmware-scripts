@@ -34,7 +34,7 @@ fi
 read -p "Enter default username for VMs (default: victim): " USERNAME
 USERNAME="${USERNAME:-victim}"
 
-DEFAULT_SSH_KEY_PATH="$HOME/.ssh/id_rsa.pub"
+DEFAULT_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 read -p "Enter path to SSH public key (default: $DEFAULT_SSH_KEY_PATH): " SSH_KEY_PATH
 SSH_KEY_PATH="${SSH_KEY_PATH:-$DEFAULT_SSH_KEY_PATH}"
 

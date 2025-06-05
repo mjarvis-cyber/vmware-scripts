@@ -75,6 +75,9 @@ if [[ ! -f "$TEMPLATE_VMDK" ]]; then
   fi
   mkdir -p "$TEMPLATE_DIR"
   wget -O "$TEMP_IMG" "$URL"
+  echo "[*] Resizing image to 32G before VMDK conversion..."
+  qemu-img resize "$TEMP_IMG" 32G
+
   echo "[*] Converting to VMDK..."
   qemu-img convert -p -f qcow2 -O vmdk "$TEMP_IMG" "$TEMPLATE_VMDK"
   rm "$TEMP_IMG"
@@ -86,7 +89,7 @@ if [[ ! -f "$TEMPLATE_VMX" ]]; then
 fi
 
 # === Init paths ===
-SSH_KEY=$(cat "$SSH_KEY_PATH")
+SSH_KEY=$(ssh-keygen -y -f "$SSH_KEY_PATH")
 UUID=$(uuidgen)
 VM_DIR="${VM_OUTPUT_DIR}/${VM_NAME}"
 
@@ -118,7 +121,7 @@ users:
     groups: sudo
     sudo: ALL=(ALL) NOPASSWD:ALL
     chpasswd: { expire: False }
-    hashed_passwd: "$6$xiFV/vdLomMezlAI$7sTlj8E6vdXziOI7AGUpiCofGHaf8z/fJDTsHTs2ptdfQCIJW.bHhAoS7Q/bUHeeDij1EVREZ54hbHa/bdiOG."
+    hashed_passwd: '\$6\$xiFV/vdLomMezlAI\$7sTlj8E6vdXziOI7AGUpiCofGHaf8z/fJDTsHTs2ptdfQCIJW.bHhAoS7Q/bUHeeDij1EVREZ54hbHa/bdiOG.'
     shell: /bin/bash
     ssh_authorized_keys:
       - ${SSH_KEY}
